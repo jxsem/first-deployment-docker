@@ -1,0 +1,57 @@
+=== GUÍA DE DOCKER: APAGAR, REINICIAR Y DESPLEGAR CONTENEDORES ===
+
+---
+
+# 1. Apagar todos los contenedores
+
+```bash
+docker stop $(docker ps -q)   # Detiene contenedores activos
+```
+
+# 2. Eliminar todos los contenedores
+
+```bash
+docker rm -f $(docker ps -aq) # Elimina todos los contenedores, activos o detenidos
+```
+
+# 3. Reiniciar contenedores existentes
+
+```bash
+docker restart $(docker ps -aq)
+```
+
+# 4. Desplegar contenedores con Docker Compose
+
+```bash
+docker-compose up -d          # Levanta los contenedores en segundo plano
+```
+
+# 5. Reinicio limpio con Docker Compose
+
+```bash
+docker-compose down           # Detiene y elimina contenedores y redes
+
+docker-compose up -d          # Vuelve a crear y levantar contenedores
+```
+
+# 6. Comandos útiles adicionales
+
+```bash
+docker ps -a                  # Ver todos los contenedores
+
+docker logs <nombre_contenedor>  # Ver logs de un contenedor
+
+docker image prune -a          # Eliminar imágenes no usadas
+```
+
+# 7. Flujo práctico de despliegue limpio
+
+```bash
+docker-compose down
+
+docker-compose up -d
+
+docker ps
+```
+
+> Levanta la aplicación desde cero con la configuración más reciente.
