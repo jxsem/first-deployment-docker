@@ -1,0 +1,12 @@
+# Variables de entorno
+.env
+
+# Archivos de macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Dependencias temporales
+node_modules/
+vendor/

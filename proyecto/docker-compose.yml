@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: app_php
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - db
+    env_file: .env  # importante
+
+  nginx:
+    image: nginx:latest
+    container_name: app_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./app:/var/www/html
+    depends_on:
+      - web
+
+  db:
+    image: mariadb:latest
+    container_name: app_db
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+
+
+volumes:
+  db_data:
+
